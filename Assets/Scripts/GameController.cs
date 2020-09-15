@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         pauseCanvas = GameObject.FindGameObjectWithTag("Pause");
+        paused = pauseCanvas.activeSelf;
     }
 
     // Update is called once per frame
@@ -24,7 +25,7 @@ public class GameController : MonoBehaviour
     public void Pause()
     {
         pauseCanvas.SetActive(!pauseCanvas.activeSelf);
-        paused = !pauseCanvas.activeSelf;
+        paused = pauseCanvas.activeSelf;
     }
 
     public bool IsPaused()

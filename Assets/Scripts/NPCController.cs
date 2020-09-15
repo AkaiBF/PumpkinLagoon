@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class NPCController : MonoBehaviour
 {
-    public List<string> conversation;
+    public List<string> conv;
+    public string charname;
+    private Queue<Conversation> conversation = new Queue<Conversation>();
     private int _xPos;
     private int _yPos;
     private Vector2 destination;
     private float speed = 0.008f;
     public GameController gc;
+    public Dialogos dialog;
 
     // Start is called before the first frame update
     void Start()
     {
+        foreach(string i in conv)
+        {
+            conversation.Enqueue(new Conversation(charname, i));
+        }
         this._xPos = 0;
         this._yPos = 0;
         this.destination = this.GetComponent<Transform>().position;
@@ -76,5 +83,10 @@ public class NPCController : MonoBehaviour
             this._xPos += (int)dir.x;
             this._yPos += (int)dir.y;
         }
+    }
+
+    public void Talk()
+    {
+        dialog.AddQueue(conversation);
     }
 }

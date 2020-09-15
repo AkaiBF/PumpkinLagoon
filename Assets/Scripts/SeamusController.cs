@@ -197,14 +197,17 @@ public class SeamusController : MonoBehaviour
         {
             Vector2 seamusPos = GetComponent<Transform>().position;
             RaycastHit2D hit = Physics2D.Linecast(seamusPos, seamusPos + forward());
-            Debug.DrawRay(seamusPos, forward(), Color.blue, 3);
             if (hit.collider.gameObject.CompareTag("calabaza"))
             {
-                Debug.Log(seamusPos + " " + forward());
-                Debug.Log(hit.collider.gameObject.name);
+                
                 hit.collider.gameObject.SetActive(false);
+                calabazas++;
             }
-            calabazas++;
+            if(hit.collider.gameObject.CompareTag("NPC"))
+            {
+
+                hit.collider.gameObject.GetComponent<NPCController>().Talk();
+            }
         }
         calaTxt.GetComponent<Text>().text = calabazas.ToString();
     }
